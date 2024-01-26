@@ -2,6 +2,10 @@ import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { cn } from '@/lib/utils';
+import { MainNav } from '@/components/main-nav';
+import { SiteHeader } from '@/components/site-header';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,14 +19,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <ThemeProvider
-        attribute='class'
-        defaultTheme='system'
-        enableSystem
-        disableTransitionOnChange
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          GeistSans.className
+        )}
       >
-        <body className={GeistSans.className}>{children}</body>
-      </ThemeProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          {children}
+          <TailwindIndicator />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
