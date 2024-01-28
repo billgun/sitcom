@@ -48,7 +48,7 @@ export default async function IndexPage() {
             🤡 Follow along on Twitter
             <ArrowRightIcon className='ml-1 h-4 w-4' />
           </Link>
-          <h1 className='font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl'>
+          <h1 className='text-balance font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl'>
             An example app built using Next.js 13 app router & server
             components.
           </h1>
@@ -110,7 +110,7 @@ export default async function IndexPage() {
               </svg>
               <div className='space-y-2'>
                 <h3 className='font-bold'>React 18</h3>
-                <p className='text-sm'>
+                <p className='text-sm text-muted-foreground'>
                   Server and Client Components. Use hook.
                 </p>
               </div>
