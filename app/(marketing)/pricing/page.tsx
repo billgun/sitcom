@@ -107,8 +107,8 @@ export default function PricingPage() {
                 A pricing page
               </h1>
               <p className='max-w-[42rem] leading-normal text-muted-foreground'>
-                That doesn't really work but you can demo something out of it i
-                guess
+                That doesn&apos;t really work but you can demo something out of
+                it i guess
               </p>
             </div>
 
@@ -274,7 +274,7 @@ export default function PricingPage() {
               >
                 Shipixen.
               </Link>{' '}
-              Check it out it's pretty cool!
+              Check it out it&apos;s pretty cool!
             </p>
           </div>
         </div>
