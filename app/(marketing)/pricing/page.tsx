@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import styles from './pricing.module.css';
 
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -30,7 +29,7 @@ export interface PricingTier {
   soldOut?: boolean;
 }
 
-export const frequencies: PricingTierFrequency[] = [
+const frequencies: PricingTierFrequency[] = [
   { id: '1', value: '1', label: 'Monthly', priceSuffix: '/month' },
   { id: '2', value: '2', label: 'Annually', priceSuffix: '/year' },
 ];
@@ -107,8 +106,8 @@ export default function PricingPage() {
                 A pricing page
               </h1>
               <p className='max-w-[42rem] leading-normal text-muted-foreground'>
-                That doesn't really work but you can demo something out of it i
-                guess
+                That doesn&apos;t really work but you can demo something out of
+                it i guess
               </p>
             </div>
 
@@ -195,7 +194,9 @@ export default function PricingPage() {
                       className={cn(
                         'text-4xl font-bold tracking-tight',
                         tier.discountPrice &&
-                          tier.discountPrice[frequency.value]
+                          tier.discountPrice[
+                            frequency.value as keyof typeof tier.discountPrice
+                          ]
                           ? 'line-through'
                           : ''
                       )}
@@ -274,7 +275,7 @@ export default function PricingPage() {
               >
                 Shipixen.
               </Link>{' '}
-              Check it out it's pretty cool!
+              Check it out it&apos;s pretty cool!
             </p>
           </div>
         </div>
