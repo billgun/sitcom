@@ -34,7 +34,7 @@ const frequencies: PricingTierFrequency[] = [
   { id: '2', value: '2', label: 'Annually', priceSuffix: '/year' },
 ];
 
-export const tiers: PricingTier[] = [
+const tiers: PricingTier[] = [
   {
     name: 'Free',
     id: '0',
