@@ -18,8 +18,10 @@ const basePath = 'content';
 
 async function getDocFromParams({ params }: DocPageProps) {
   const slug = params.slug?.join('/') || 'index';
-  try {
-    const source = fs.readFileSync(path.join(basePath, `${slug}.mdx`), 'utf8');
+  const filePath = path.join(basePath, `${slug}.mdx`);
+
+  if (fs.existsSync(filePath)) {
+    const source = fs.readFileSync(filePath, 'utf8');
     const { data: frontMatter, content } = matter(source);
 
     return {
@@ -27,8 +29,8 @@ async function getDocFromParams({ params }: DocPageProps) {
       slug,
       content,
     };
-  } catch (e) {
-    notFound();
+  } else {
+    return null;
   }
 }
 
