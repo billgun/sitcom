@@ -20,11 +20,12 @@ const blogDir = 'content/blog';
 async function getBlogPostFromParams({ params }: BlogPostPageProps) {
   const slug = params.slug?.join('/') || 'index';
   const filePath = path.join(blogDir, `${slug}.mdx`);
-
+  console.log(fs.existsSync(filePath));
   if (fs.existsSync(filePath)) {
     const source = fs.readFileSync(filePath, 'utf8');
     const { data: frontMatter, content } = matter(source);
 
+    console.log('data', frontMatter);
     return {
       meta: frontMatter,
       slug,

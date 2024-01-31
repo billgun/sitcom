@@ -97,7 +97,7 @@ export default function PricingPage() {
   const bannerText = '';
 
   return (
-    <section className='space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32'>
+    <section className='space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-10'>
       <div className={cn('flex w-full flex-col items-center')}>
         <div className='flex w-full flex-col items-center'>
           <div className='mx-auto flex max-w-7xl flex-col items-center px-6 lg:px-8'>

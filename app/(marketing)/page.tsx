@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
+import { Icons } from '@/components/icons';
 
 async function getGitHubStars(): Promise<string | null> {
   try {
@@ -118,9 +119,7 @@ export default async function IndexPage() {
           </div>
           <div className='relative overflow-hidden rounded-lg border bg-background p-2'>
             <div className='flex h-[180px] flex-col justify-between rounded-md p-6'>
-              <svg viewBox='0 0 24 24' className='h-12 w-12 fill-current'>
-                <path d='M0 12C0 5.373 5.373 0 12 0c4.873 0 9.067 2.904 10.947 7.077l-15.87 15.87a11.981 11.981 0 0 1-1.935-1.099L14.99 12H12l-8.485 8.485A11.962 11.962 0 0 1 0 12Zm12.004 12L24 12.004C23.998 18.628 18.628 23.998 12.004 24Z' />
-              </svg>
+              <Icons.supabase className='h-12 w-12 fill-current' />
               <div className='space-y-2'>
                 <h3 className='font-bold'>Database</h3>
                 <p className='text-sm text-muted-foreground'>
@@ -178,8 +177,8 @@ export default async function IndexPage() {
         </div>
         <div className='mx-auto text-center md:max-w-[58rem]'>
           <p className='leading-normal text-muted-foreground sm:text-lg sm:leading-7'>
-            Taxonomy also includes a blog and a full-featured documentation site
-            built using Contentlayer and MDX.
+            Sitcom also includes a blog and a full-featured documentation site
+            built using next-mdx-remote.
           </p>
         </div>
       </section>
@@ -189,7 +188,7 @@ export default async function IndexPage() {
             Proudly Open Source
           </h2>
           <p className='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'>
-            Taxonomy is open source and powered by open source software. <br />{' '}
+            Sitcom is open source and powered by open source software. <br />{' '}
             The code is available on{' '}
             <Link
               href={siteConfig.links.github}
