@@ -17,7 +17,7 @@ const docDir = 'content/docs';
 
 async function getDocFromParams({ params }: DocPageProps) {
   const slug = params.slug?.join('/') || 'index';
-  const filePath = path.join(docDir, `${slug}.mdx`);
+  const filePath = path.join(process.cwd(), docDir, `${slug}.mdx`);
 
   if (fs.existsSync(filePath)) {
     const source = fs.readFileSync(filePath, 'utf8');
