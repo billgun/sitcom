@@ -21,13 +21,13 @@ export function MainNav() {
       </Link>
       <nav className='flex items-center gap-6 text-sm'>
         <Link
-          href='/docs'
+          href='/#features'
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname === '/docs' ? 'text-foreground' : 'text-foreground/60'
+            pathname?.startsWith('/') ? 'text-foreground' : 'text-foreground/60'
           )}
         >
-          Docs
+          Features
         </Link>
         <Link
           href='/pricing'
@@ -41,34 +41,24 @@ export function MainNav() {
           Pricing
         </Link>
         <Link
-          href='/themes'
+          href='/docs'
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname?.startsWith('/themes')
+            pathname === '/docs' ? 'text-foreground' : 'text-foreground/60'
+          )}
+        >
+          Docs
+        </Link>
+        <Link
+          href='/blog'
+          className={cn(
+            'transition-colors hover:text-foreground/80',
+            pathname?.startsWith('/blog')
               ? 'text-foreground'
               : 'text-foreground/60'
           )}
         >
-          Themes
-        </Link>
-        <Link
-          href='/examples'
-          className={cn(
-            'transition-colors hover:text-foreground/80',
-            pathname?.startsWith('/examples')
-              ? 'text-foreground'
-              : 'text-foreground/60'
-          )}
-        >
-          Examples
-        </Link>
-        <Link
-          href={siteConfig.links.github}
-          className={cn(
-            'hidden text-foreground/60 transition-colors hover:text-foreground/80 lg:block'
-          )}
-        >
-          GitHub
+          Blog
         </Link>
       </nav>
     </div>

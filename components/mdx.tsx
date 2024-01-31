@@ -6,12 +6,19 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Callout } from '@/components/ui/callout';
+import Image, { ImageProps } from 'next/image';
 
 const components = {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  Callout,
+  Image: ({ className, ...props }: ImageProps) => (
+    <Image className={cn(className)} {...props} />
+  ),
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(

@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-
 import Link from 'next/link';
 import { Mdx } from '@/components/mdx';
 import { notFound } from 'next/navigation';
@@ -14,11 +13,11 @@ interface DocPageProps {
     slug: string[];
   };
 }
-const basePath = 'content';
+const docDir = 'content/docs';
 
 async function getDocFromParams({ params }: DocPageProps) {
   const slug = params.slug?.join('/') || 'index';
-  const filePath = path.join(basePath, `${slug}.mdx`);
+  const filePath = path.join(docDir, `${slug}.mdx`);
 
   if (fs.existsSync(filePath)) {
     const source = fs.readFileSync(filePath, 'utf8');
