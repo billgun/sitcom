@@ -19,13 +19,11 @@ const blogDir = 'content/blog';
 
 async function getBlogPostFromParams({ params }: BlogPostPageProps) {
   const slug = params.slug?.join('/') || 'index';
-  const filePath = path.join(blogDir, `${slug}.mdx`);
-  console.log(fs.existsSync(filePath));
+  const filePath = path.join(process.cwd(), blogDir, `${slug}.mdx`);
   if (fs.existsSync(filePath)) {
     const source = fs.readFileSync(filePath, 'utf8');
     const { data: frontMatter, content } = matter(source);
 
-    console.log('data', frontMatter);
     return {
       meta: frontMatter,
       slug,
@@ -38,11 +36,12 @@ async function getBlogPostFromParams({ params }: BlogPostPageProps) {
 
 async function getAllAuthors() {
   const authorDir = 'content/authors';
-  const files = fs.readdirSync(path.join(authorDir));
+
+  const files = fs.readdirSync(path.join(process.cwd(), authorDir));
 
   const authors = files.map((filename) => {
     const fileContent = fs.readFileSync(
-      path.join(authorDir, filename),
+      path.join(process.cwd(), authorDir, filename),
       'utf-8'
     );
     const { data: frontMatter } = matter(fileContent);
@@ -59,8 +58,6 @@ export default async function PostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
-
-  console.log(post.meta);
 
   const authors = await getAllAuthors();
 

@@ -14,11 +14,11 @@ export const metadata = {
 const blogDir = 'content/blog';
 
 export default async function BlogPage() {
-  const files = fs.readdirSync(path.join(blogDir));
+  const files = fs.readdirSync(path.join(process.cwd(), blogDir));
   const posts = files
     .map((filename) => {
       const fileContent = fs.readFileSync(
-        path.join(blogDir, filename),
+        path.join(process.cwd(), blogDir, filename),
         'utf-8'
       );
       const { data: frontMatter } = matter(fileContent);
