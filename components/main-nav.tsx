@@ -22,10 +22,7 @@ export function MainNav() {
       <nav className='flex items-center gap-6 text-sm'>
         <Link
           href='/#features'
-          className={cn(
-            'transition-colors hover:text-foreground/80',
-            pathname?.startsWith('/') ? 'text-foreground' : 'text-foreground/60'
-          )}
+          className={cn('transition-colors hover:text-foreground/80')}
         >
           Features
         </Link>
@@ -33,7 +30,7 @@ export function MainNav() {
           href='/pricing'
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname?.startsWith('/components')
+            pathname?.startsWith('/pricing')
               ? 'text-foreground'
               : 'text-foreground/60'
           )}

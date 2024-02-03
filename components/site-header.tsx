@@ -4,7 +4,7 @@ import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { MainNav } from '@/components/main-nav';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { ModeToggle } from './mode-toggle';
 import { MobileNav } from './mobile-nav';
 
@@ -51,6 +51,12 @@ export function SiteHeader() {
                 <span className='sr-only'>Twitter</span>
               </div>
             </Link>
+            <Button variant={'outline'} asChild>
+              <Link href={'/login'}>Login</Link>
+            </Button>
+            <Button asChild>
+              <Link href={'/signup'}>Get Started</Link>
+            </Button>
             <ModeToggle />
           </nav>
         </div>

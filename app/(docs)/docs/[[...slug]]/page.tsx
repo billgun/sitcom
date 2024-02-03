@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { ChevronRightIcon, ExternalLinkIcon } from '@radix-ui/react-icons';
 import { cn } from '@/lib/utils';
 import { badgeVariants } from '@/components/ui/badge';
+import TableOfContents from '@/components/table-of-contents';
 
 interface DocPageProps {
   params: {
@@ -32,6 +33,13 @@ async function getDocFromParams({ params }: DocPageProps) {
     return null;
   }
 }
+// export async function getStaticProps() {
+//   // MDX text - can be from a local file, database, anywhere
+//   const source =
+//     'Some **mdx** text, with a component using a scope variable <Test product={product} />'
+//   const mdxSource = await serialize(source)
+//   return { props: { source: mdxSource } }
+// }
 
 export default async function DocPage({ params }: DocPageProps) {
   const doc = await getDocFromParams({ params });
@@ -42,7 +50,7 @@ export default async function DocPage({ params }: DocPageProps) {
 
   return (
     <main className=' relative py-6  lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]'>
-      <div className='mx-auto w-full min-w-0'>
+      <article className='mx-auto w-full min-w-0'>
         <div className='mb-4 flex items-center space-x-1 text-sm text-muted-foreground'>
           <div className='overflow-hidden text-ellipsis whitespace-nowrap'>
             Docs
@@ -90,7 +98,7 @@ export default async function DocPage({ params }: DocPageProps) {
           <Mdx source={doc.content} />
         </div>
         {/* <DocsPager doc={doc} /> */}
-      </div>
+      </article>
       {/* {doc.toc && (
         <div className="hidden text-sm xl:block">
           <div className="sticky top-16 -mt-10 pt-4">
@@ -102,6 +110,7 @@ export default async function DocPage({ params }: DocPageProps) {
           </div>
         </div>
       )} */}
+      <TableOfContents />
     </main>
   );
 }

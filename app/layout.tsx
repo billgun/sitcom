@@ -31,7 +31,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader />
           {children}
           <TailwindIndicator />
         </ThemeProvider>

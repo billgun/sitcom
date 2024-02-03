@@ -71,7 +71,7 @@ export default async function PostPage({ params }: BlogPostPageProps) {
         )}
       >
         <ChevronLeftIcon className='mr-2 h-4 w-4' />
-        See all post.metas
+        See all post
       </Link>
       <div>
         {post.meta.date && (
