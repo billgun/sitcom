@@ -1,0 +1,12 @@
+---
+title: Integrating with Supabase
+description: How to use incremental static regeneration using dynamic routes.
+image: /images/blog/blog-post-2.jpg
+date: '2023-03-04'
+authors:
+  - billgun
+---
+
+According to the Supabase documentation, it is safe to expose your Supabase anon key when you have Row Level Security enabled. This is because row access permission is checked against your access policies and the user's JSON Web Token (JWT). The JWT is automatically sent by the Supabase client libraries if the user is logged in using Supabase Auth.
+
+However, it is important to note that the service_role key for your Supabase API should NEVER be used in a browser, as it will bypass Row Level Security.
