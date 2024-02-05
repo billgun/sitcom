@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
-import { Mdx } from '@/components/mdx';
+import { Mdx, getMdx, getMdxSerialize } from '@/components/mdx';
 import { notFound } from 'next/navigation';
 import { ChevronRightIcon, ExternalLinkIcon } from '@radix-ui/react-icons';
 import { cn } from '@/lib/utils';
@@ -16,16 +16,20 @@ interface DocPageProps {
 }
 const docDir = 'content/docs';
 
+// TODO: Fixing MDX plugin
+
 async function getDocFromParams({ params }: DocPageProps) {
   const slug = params.slug?.join('/') || 'index';
   const filePath = path.join(process.cwd(), docDir, `${slug}.mdx`);
 
   if (fs.existsSync(filePath)) {
     const source = fs.readFileSync(filePath, 'utf8');
-    const { data: frontMatter, content } = matter(source);
+    // const { data: frontMatter, content } = matter(source);
+    const { content, frontmatter } = await getMdx({ source });
+    // const { compiledSource, frontmatter } = await getMdxSerialize({ source });
 
     return {
-      meta: frontMatter,
+      meta: frontmatter,
       slug,
       content,
     };
@@ -94,7 +98,8 @@ export default async function DocPage({ params }: DocPageProps) {
             )}
           </div>
         ) : null}
-        <div className='pb-12 pt-8'>
+        <div className='pb-12 pt-8 '>
+          {/* {doc.content} */}
           <Mdx source={doc.content} />
         </div>
         {/* <DocsPager doc={doc} /> */}

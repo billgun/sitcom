@@ -9,6 +9,9 @@ import { buttonVariants } from '@/components/ui/button';
 import { Mdx } from '@/components/mdx';
 import { ChevronLeftIcon } from '@radix-ui/react-icons';
 
+// TODO: Fixing authors fetching for the one in metadata only
+// TODO: Fixing MDX plugin
+
 interface BlogPostPageProps {
   params: {
     slug: string[];
@@ -82,7 +85,7 @@ export default async function PostPage({ params }: BlogPostPageProps) {
             Published on {formatDate(post.meta.date)}
           </time>
         )}
-        <h1 className='mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl'>
+        <h1 className='font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl'>
           {post.meta.title}
         </h1>
         {authors?.length ? (

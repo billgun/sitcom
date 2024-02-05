@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-// import ErrorMessage from '@/components/ui/ErrorMessage';
-// import { signUp } from '@/actions/signup';
 import { useState } from 'react';
 import { Icons } from '@/components/icons';
 import SignupForm from './signup-form';
@@ -47,7 +45,7 @@ export default function Signup() {
         <div className='sm:mx-auto sm:w-full sm:max-w-md'>
           <Icons.logo className='mx-auto h-10 w-auto' />
           <h2 className='mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-foreground'>
-            Sign up! It's free
+            Sign up! It&apos;s free
           </h2>
         </div>
 

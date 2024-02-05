@@ -69,7 +69,7 @@ export default function Login() {
               href='/signup'
               className='font-semibold leading-6 text-foreground hover:text-foreground/80'
             >
-              Let's get started
+              Let&apos;s get started
             </Link>
           </p>
         </div>

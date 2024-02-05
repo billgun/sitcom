@@ -1,3 +1,4 @@
+'use client';
 import { cn } from '@/lib/utils';
 import {
   Accordion,
@@ -5,10 +6,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXRemote } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Callout } from '@/components/ui/callout';
 import Image, { ImageProps } from 'next/image';
+import remarkToc from 'remark-toc';
+import remarkGfm from 'remark-gfm';
 
 const components = {
   Accordion,
@@ -22,7 +26,7 @@ const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        'mt-2 scroll-m-20 font-heading text-4xl font-bold',
+        'font-heading mt-2 scroll-m-20 text-4xl font-bold',
         className
       )}
       {...props}
@@ -31,7 +35,7 @@ const components = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        'mt-12 scroll-m-20 border-b pb-2 font-heading text-2xl font-semibold tracking-tight first:mt-0',
+        'font-heading mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0',
         className
       )}
       {...props}
@@ -40,7 +44,7 @@ const components = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        'mt-8 scroll-m-20 font-heading text-xl font-semibold tracking-tight',
+        'font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight',
         className
       )}
       {...props}
@@ -49,7 +53,7 @@ const components = {
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
       className={cn(
-        'mt-8 scroll-m-20 font-heading text-lg font-semibold tracking-tight',
+        'font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight',
         className
       )}
       {...props}
@@ -145,6 +149,41 @@ const components = {
 interface MdxProps {
   source: string;
 }
+
+const options = {
+  mdxOptions: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [],
+  },
+};
 export function Mdx({ source }: MdxProps) {
-  return <MDXRemote source={source} components={components} />;
+  return (
+    <MDXRemote source={source} components={components} options={options} />
+  );
+}
+
+export async function getMdx({ source }: MdxProps) {
+  const { content, frontmatter } = await compileMDX<any>({
+    source,
+    components,
+    options: {
+      parseFrontmatter: true,
+      mdxOptions: { remarkPlugins: [remarkToc, remarkGfm], format: 'mdx' },
+    },
+  });
+  return {
+    content,
+    frontmatter,
+  };
+}
+
+export async function getMdxSerialize({ source }: MdxProps) {
+  const { compiledSource, frontmatter } = await serialize<any>({
+    source,
+    components,
+  });
+  return {
+    compiledSource,
+    frontmatter,
+  };
 }
