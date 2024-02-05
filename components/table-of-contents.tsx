@@ -1,86 +1,114 @@
 'use client';
 
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 
-export interface HeadingType {
-  text: string;
-  anchor: string;
+import { TableOfContents } from '@/lib/toc';
+import { cn } from '@/lib/utils';
+import { useMounted } from '@/hooks/use-mounted';
+
+interface TocProps {
+  toc: TableOfContents;
 }
 
-const TableOfContents = () => {
-  const [headings, setHeadings] = useState<HeadingType[]>([]);
-  const tocLinksRef = useRef<HTMLAnchorElement[]>([]);
-  const firstVisibleLink = useRef<HTMLAnchorElement | null>(null);
+export function TableOfContents({ toc }: TocProps) {
+  const itemIds = React.useMemo(
+    () =>
+      toc.items
+        ? toc.items
+            .flatMap((item) => [item.url, item?.items?.map((item) => item.url)])
+            .flat()
+            .filter(Boolean)
+            .map((id) => id?.split('#')[1])
+        : [],
+    [toc]
+  );
+  const activeHeading = useActiveItem(itemIds);
+  const mounted = useMounted();
 
-  useEffect(() => {
-    const obsvCallback: IntersectionObserverCallback = (entries) => {
-      const links = tocLinksRef.current;
+  if (!toc?.items) {
+    return null;
+  }
 
-      entries.forEach((entry) => {
-        const activeHeading = entry.target;
+  return mounted ? (
+    <div className='space-y-2'>
+      <p className='font-medium'>On This Page</p>
+      <Tree tree={toc} activeItem={activeHeading} />
+    </div>
+  ) : null;
+}
 
-        links.forEach((link) => {
-          const href = link?.href.split('#')[1];
+function useActiveItem(itemIds: (string | undefined)[]) {
+  const [activeId, setActiveId] = React.useState<string>('');
 
-          if (entry.isIntersecting && href === activeHeading.id) {
-            links.forEach((l) => l?.classList.remove('active'));
-            link?.classList.add('active');
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
           }
         });
+      },
+      { rootMargin: `0% 0% -80% 0%` }
+    );
 
-        if (!firstVisibleLink.current) {
-          links[0]?.classList.add('active');
-          firstVisibleLink.current = links[0];
+    itemIds?.forEach((id) => {
+      if (!id) {
+        return;
+      }
+
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      itemIds?.forEach((id) => {
+        if (!id) {
+          return;
+        }
+
+        const element = document.getElementById(id);
+        if (element) {
+          observer.unobserve(element);
         }
       });
     };
+  }, [itemIds]);
 
-    const observer = new IntersectionObserver(obsvCallback, {
-      rootMargin: '0px 0px -70% 0px',
-      threshold: [1.0],
-    });
+  return activeId;
+}
 
-    const h2Headings = Array.from(
-      document.querySelectorAll('article > h2')
-    ) as HTMLElement[];
+interface TreeProps {
+  tree: TableOfContents;
+  level?: number;
+  activeItem?: string | null;
+}
 
-    const h2s: HeadingType[] = h2Headings.map((h2) => {
-      observer.observe(h2);
-
-      return {
-        text: h2.dataset.text!,
-        anchor: '#' + h2.id,
-      };
-    });
-
-    setHeadings(h2s);
-
-    return () => {
-      h2Headings.map((h2) => {
-        observer.unobserve(h2);
-      });
-    };
-  }, []);
-
-  return (
-    <div className='container'>
-      <p>Table of Contents</p>
-      {headings.length > 0 ? (
-        <>
-          {headings.map((heading) => (
-            <Link
-              key={heading.text}
-              ref={(el: HTMLAnchorElement) => tocLinksRef.current.push(el)}
-              href={heading.anchor}
+function Tree({ tree, level = 1, activeItem }: TreeProps) {
+  return tree?.items?.length && level < 3 ? (
+    <ul className={cn('m-0 list-none', { 'pl-4': level !== 1 })}>
+      {tree.items.map((item, index) => {
+        return (
+          <li key={index} className={cn('mt-0 pt-2')}>
+            <a
+              href={item.url}
+              className={cn(
+                'inline-block no-underline',
+                item.url === `#${activeItem}`
+                  ? 'font-medium text-primary'
+                  : 'text-sm text-muted-foreground'
+              )}
             >
-              {heading.text}
-            </Link>
-          ))}
-        </>
-      ) : null}
-    </div>
-  );
-};
-
-export default TableOfContents;
+              {item.title}
+            </a>
+            {item.items?.length ? (
+              <Tree tree={item} level={level + 1} activeItem={activeItem} />
+            ) : null}
+          </li>
+        );
+      })}
+    </ul>
+  ) : null;
+}

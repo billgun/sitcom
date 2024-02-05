@@ -1,4 +1,3 @@
-'use client';
 import { cn } from '@/lib/utils';
 import {
   Accordion,
@@ -6,13 +5,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { MDXRemote } from 'next-mdx-remote';
+import {
+  CompileMDXResult,
+  MDXRemote,
+  MDXRemoteProps,
+  compileMDX,
+} from 'next-mdx-remote/rsc';
 import { serialize } from 'next-mdx-remote/serialize';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Callout } from '@/components/ui/callout';
 import Image, { ImageProps } from 'next/image';
 import remarkToc from 'remark-toc';
 import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
 
 const components = {
   Accordion,
@@ -152,8 +157,8 @@ interface MdxProps {
 
 const options = {
   mdxOptions: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    remarkPlugins: [remarkGfm, remarkToc],
+    rehypePlugins: [rehypeSlug],
   },
 };
 export function Mdx({ source }: MdxProps) {
@@ -163,7 +168,7 @@ export function Mdx({ source }: MdxProps) {
 }
 
 export async function getMdx({ source }: MdxProps) {
-  const { content, frontmatter } = await compileMDX<any>({
+  const { content, frontmatter } = await compileMDX<CompileMDXResult>({
     source,
     components,
     options: {
@@ -181,6 +186,7 @@ export async function getMdxSerialize({ source }: MdxProps) {
   const { compiledSource, frontmatter } = await serialize<any>({
     source,
     components,
+    options: options,
   });
   return {
     compiledSource,
