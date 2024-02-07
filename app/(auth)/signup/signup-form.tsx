@@ -18,6 +18,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { signUp } from './actions';
 
 const signupFormSchema = z.object({
   username: z.string().min(1, {
@@ -34,9 +35,6 @@ const signupFormSchema = z.object({
   password: z.string().min(6, {
     message: 'Password must be at least 6 characters.',
   }),
-  tnc: z.boolean().refine((value) => value === true, {
-    message: 'Checkbox must be checked',
-  }),
 });
 
 type SignupFormValues = z.infer<typeof signupFormSchema>;
@@ -45,10 +43,9 @@ const defaultValues: Partial<SignupFormValues> = {
   username: '',
   email: '',
   password: '',
-  tnc: false,
 };
 
-export default function SignupForm() {
+export function SignupForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<SignupFormValues>({
@@ -58,9 +55,7 @@ export default function SignupForm() {
   async function onSubmit(formData: SignupFormValues) {
     setIsLoading(true);
 
-    const supabase = createClient();
-
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await signUp({
       email: formData.email,
       password: formData.password,
       options: {

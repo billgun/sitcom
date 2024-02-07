@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import LoginForm from './login-form';
+import { LoginForm } from './login-form';
 import { Icons } from '@/components/icons';
 import { siteConfig } from '@/config/site';
 import { ChevronLeftIcon } from '@radix-ui/react-icons';

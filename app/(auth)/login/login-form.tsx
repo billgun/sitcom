@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { signIn } from './actions';
 
 const loginFormSchema = z.object({
   email: z
@@ -42,7 +43,7 @@ const defaultValues: Partial<LoginFormValues> = {
   rememberMe: false,
 };
 
-export default function LoginForm() {
+export function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -55,7 +56,7 @@ export default function LoginForm() {
 
     const supabase = createClient();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await signIn({
       email: formData.email,
       password: formData.password,
     });

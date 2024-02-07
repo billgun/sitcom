@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Icons } from '@/components/icons';
-import { SignupForm } from './signup-form';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { ChevronLeftIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
 
 export default function Signup() {
   return (
@@ -32,32 +32,15 @@ export default function Signup() {
 
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]'>
           <div className='bg-primary-foreground px-6 py-12 shadow sm:rounded-lg sm:px-12'>
-            <SignupForm />
-
             <div>
-              <div className='relative mt-10'>
-                <div
-                  className='absolute inset-0 flex items-center'
-                  aria-hidden='true'
-                >
-                  <Separator className='my-4 bg-foreground' />
-                </div>
-                <div className='relative flex justify-center text-sm font-medium leading-6'>
-                  <span className='bg-primary-foreground px-6 text-foreground'>
-                    Or continue with
-                  </span>
-                </div>
-              </div>
-
               <div className='mt-6 grid grid-cols-1 gap-4'>
-                <Button asChild variant={'default'} className='gap-3'>
-                  <Link href='#'>
-                    <Icons.google className='h-4 w-4' />
-                    <span className='text-sm font-semibold leading-6'>
-                      Google
-                    </span>
-                  </Link>
-                </Button>
+                <Image
+                  src={'/images/work-party.jpg'}
+                  alt={'Signup Success'}
+                  width={804}
+                  height={452}
+                  className='rounded-md border bg-muted fill-current transition-colors'
+                />
               </div>
             </div>
           </div>

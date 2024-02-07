@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/actions';
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
