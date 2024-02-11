@@ -1,3 +1,5 @@
+import type { Icons } from '@/components/icons';
+
 export type SiteConfig = {
   name: string;
   description: string;
@@ -9,12 +11,32 @@ export type SiteConfig = {
   };
 };
 
+export type SidebarNavItem = {
+  title: string;
+  disabled?: boolean;
+  external?: boolean;
+  icon?: React.ForwardRefExoticComponent<
+    IconProps & React.RefAttributes<SVGSVGElement>
+  >;
+} & (
+  | {
+      href: string;
+      items?: never;
+    }
+  | {
+      href?: string;
+      items: NavLink[];
+    }
+);
+
 export interface NavItem {
   title: string;
   href?: string;
   disabled?: boolean;
   external?: boolean;
-  icon?: keyof typeof Icons;
+  icon?: React.ForwardRefExoticComponent<
+    IconProps & React.RefAttributes<SVGSVGElement>
+  >;
   label?: string;
 }
 
@@ -25,3 +47,7 @@ export interface NavItemWithChildren extends NavItem {
 export interface MainNavItem extends NavItem {}
 
 export interface SidebarNavItem extends NavItemWithChildren {}
+
+export type DashboardConfig = {
+  sidebarNav: SidebarNavItem[];
+};
