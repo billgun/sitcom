@@ -1,14 +1,3 @@
-import Link from 'next/link';
-
-import { env } from '@/env.mjs';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { ArrowRightIcon } from '@radix-ui/react-icons';
-import { Icons } from '@/components/icons';
-import { getCurrentUser } from '@/lib/session';
-import { redirect } from 'next/navigation';
-
 export default async function DashboardPage() {
   // const { data, error } = await getCurrentUser();
 

@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { CheckCircledIcon } from '@radix-ui/react-icons';
+import { CheckCircle2Icon } from 'lucide-react';
 import Link from 'next/link';
 
 export interface PricingTierFrequency {
@@ -249,7 +249,7 @@ export default function PricingPage() {
                   >
                     {tier.features.map((feature) => (
                       <li key={feature} className='flex gap-x-3'>
-                        <CheckCircledIcon
+                        <CheckCircle2Icon
                           className={cn(
                             tier.highlighted
                               ? 'text-muted-foreground'

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { cn, formatDate } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { Mdx } from '@/components/mdx';
-import { ChevronLeftIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon } from 'lucide-react';
 
 // TODO: Fixing authors fetching for the one in metadata only
 // TODO: Fixing MDX plugin

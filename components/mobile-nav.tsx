@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ViewVerticalIcon } from '@radix-ui/react-icons';
+import { ViewVerticalIcon } from 'lucide-react';
 
 import { docsConfig } from '@/config/docs';
 import { siteConfig } from '@/config/site';

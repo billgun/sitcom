@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronRightIcon, ExternalLinkIcon } from '@radix-ui/react-icons';
+import { ChevronRightIcon, ExternalLinkIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { badgeVariants } from '@/components/ui/badge';
 import { Mdx, getMdx } from '@/components/mdx';

@@ -3,7 +3,7 @@ import { Icons } from '@/components/icons';
 import { SignupForm } from './signup-form';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ChevronLeftIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon } from 'lucide-react';
 
 export default function Signup() {
   return (

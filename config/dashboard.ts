@@ -1,5 +1,5 @@
 import { DashboardConfig } from '@/types';
-import { CameraIcon, FileTextIcon, IdCardIcon } from '@radix-ui/react-icons';
+import { CogIcon, CreditCardIcon, FileTextIcon } from 'lucide-react';
 
 export const dashboardConfig: DashboardConfig = {
   sidebarNav: [
@@ -11,12 +11,12 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: 'Billing',
       href: '/dashboard/billing',
-      icon: IdCardIcon,
+      icon: CreditCardIcon,
     },
     {
       title: 'Settings',
       href: '/dashboard/settings',
-      icon: CameraIcon,
+      icon: CogIcon,
     },
   ],
 };
