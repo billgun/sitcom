@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { CheckCircledIcon } from '@radix-ui/react-icons';
+import { CheckCircledIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export interface PricingTierFrequency {

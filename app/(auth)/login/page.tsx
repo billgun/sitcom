@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator';
 import { LoginForm } from './login-form';
 import { Icons } from '@/components/icons';
 import { siteConfig } from '@/config/site';
-import { ChevronLeftIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon } from 'lucide-react';
 
 export default function Login() {
   return (

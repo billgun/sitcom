@@ -4,7 +4,7 @@ import { env } from '@/env.mjs';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { ArrowRightIcon } from '@radix-ui/react-icons';
+import { ArrowRightIcon } from 'lucide-react';
 import { Icons } from '@/components/icons';
 
 async function getGitHubStars(): Promise<string | null> {
@@ -49,7 +49,7 @@ export default async function IndexPage() {
             🤡 Follow along on Twitter
             <ArrowRightIcon className='ml-1 h-4 w-4' />
           </Link>
-          <h1 className='text-balance font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl'>
+          <h1 className='font-heading text-balance text-2xl sm:text-4xl md:text-5xl lg:text-6xl'>
             An example app built using Next.js 13 app router & server
             components.
           </h1>

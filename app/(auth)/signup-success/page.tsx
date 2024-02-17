@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ChevronLeftIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Signup() {
