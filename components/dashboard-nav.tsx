@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 
 import { SidebarNavItem } from '@/types';
 import { cn } from '@/lib/utils';
-import { IconProps } from 'lucide-react/dist/types';
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
