@@ -1,12 +1,9 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/actions';
-import { SignUpWithPasswordCredentials } from '@supabase/supabase-js';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 
 export async function getUserPosts() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
   return { data, error };
 }

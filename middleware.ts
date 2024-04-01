@@ -1,6 +1,5 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
-import { NextResponse, type NextRequest } from 'next/server';
 import { createClient } from '@/lib/supabase/middleware';
+import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
@@ -9,7 +8,7 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  const supabase = createClient({ request, response });
+  const { supabase } = createClient(request);
 
   await supabase.auth.getUser();
 

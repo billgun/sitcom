@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-import { env } from '@/env.mjs';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { ArrowRightIcon } from 'lucide-react';
 import { Icons } from '@/components/icons';
+import { buttonVariants } from '@/components/ui/button';
+import { siteConfig } from '@/config/site';
+import { env } from '@/env.mjs';
+import { cn } from '@/lib/utils';
+import { ArrowRightIcon } from 'lucide-react';
 
 async function getGitHubStars(): Promise<string | null> {
   try {
@@ -55,7 +55,12 @@ export default async function IndexPage() {
           </h1>
           <p className='text-muted-foreground'>
             Inspired from{' '}
-            <Link href={'https://tx.shadcn.com/'}>Taxonomy by shadcn</Link>
+            <Link
+              href={'https://tx.shadcn.com/'}
+              className='underline underline-offset-2'
+            >
+              Taxonomy by shadcn
+            </Link>
           </p>
           <p className='max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8'>
             I&apos;m building a web app with Next.js 13 and open sourcing
